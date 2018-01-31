@@ -1,0 +1,119 @@
+Week 3 Lab
+Put the answers to the questions below in a text file that you add to your GitHub respository.
+
+Exercise 1
+
+Create a new MVC project.
+
+Start the application to make sure it runs.
+
+Change the content of the Home view.  Don't worry if you haven't worked with HTML before.  We'll cover HTML in a future lecture.  For now, just look at the HTML and see if you can figure out how each of the HTML tags affect the display in the browser.
+
+Remove Contact action and view.
+
+Find the common layout and so the following:
+Change the application name text.
+Remove the link to Contact in the navigation bar.
+Modify the text in the copyright footer.
+What dynamically generates the copyright year?
+-->	C# function DateTime.Now.Year
+Where does the year get generated, browser or Web server?
+-->	It gets generated on the web server since it is C# code and not HTML
+
+Start the application to make sure you can see the changes you made in step 5.
+
+
+Exercise 2
+
+Create a folder in your project and name it "Data".
+
+Create an in-memory database using a static class under the "Data" folder.
+
+Create a sub-folder under "Data" and call it "Entities".
+
+Create a model for an application entity named “User” under the “Entities” folder.  For the new entity's properties,
+Include the following:
+first name
+middle name
+last name
+email address
+years in school (make an int)
+anything else you want
+
+Create an empty controller with an action named "Create" for rendering a create “User” view. Remember that this is an HTTP GET endpoint.
+Insert [HttpGet] (with the brackets) just above the new action.
+
+Create a view that renders an HTML form for entering a new User.  Use the layout that was created in Exercise 1 (defined in the _ViewStart.cshtml file.
+What are the items that start with "@Html." called?
+-->	HtmlHelpers or TagHelpers
+How does the view know what model it is supposed to use for rendering input fields for model properties?
+-->	the @model statement at the top of the .cshtml file
+
+Create a link in the top navigation bar that allows a user to navigate from the starting page to the create User page.
+
+Start the application to make sure navigation to the create User page works and that the HTML form displays as expected (all properties of the model are present).
+Is the text displayed in the footer the same as what is displayed in the footer on the home page?  Why is it the same?
+-->	Yes, because it was the Layout was modified and the ViewStart states that all pages use the Layout by default. This means that every page, by default, will reflect the changes made to the Layout
+
+Click on the "Back to List" link.  What happens?  Why?
+-->	Server Error, because there is no Index action or corresponding view and MVC doesn't know where to redirect the browser.
+
+
+Exercise 3
+
+Add a static property to the in-memory database that represents a collection of "Users".
+
+Create an action named "Create" that takes a User as input and stores it in the “Users” collection.  Remember that this is an HTTP POST endpoint.
+Insert [HttpPost] (with the brackets) just above the new action.
+
+Add an action and view combination that renders a list of existing Users.
+Where is the "Users" data defined in the view?
+-->	In a C# foreach loop that renders each user in the list
+
+In the "list" action, get the current collection of Users from the in-memory database and pass the collection to the view.
+
+Add code to redirect the user to the list of Users after they create a new User.
+
+Change the link in the navigation bar to allow the user to navigate to the list User page rather than the create User page.
+
+Start the application to make sure it is functioning as expected (you can add a User and see a list of users that have been added).
+
+
+Exercise 4
+
+Run the application and try adding a User with only the "Years in School" entered.
+What is displayed when the application returns you to the list of Users?
+-->	Empty data fields except YearsInSchool
+
+Add attributes to the User model to force all of the input fields to be required except middle name.
+Try adding a "User" with one or more of the required fields missing.  What happens?
+-->	Validation errors for all required fields not filled in
+
+Add logic in the create action to check the validity of the model.  If valid redirect the user to the list User page.
+Otherwise, send them back to the User create page with the User data they entered.
+
+Add attributes to the User model to make the labels for the input fields more “user friendly”.
+
+Start the application to make sure it is functioning as expected.
+
+
+Exercise 5 (Skip this step as we will cover databases in the Week 4 lecture)
+
+Replace the in-memory database with a real database.
+
+Keep the in-memory database static class for next week’s lab.
+
+Add EntityFramework NuGet package.
+
+Add an int UserId property to the User model with the [Key] attribute;
+
+Recreate the UserController using the EntityFramework template in Visual Studio.
+
+Comment out the actions that do not yet have views.
+
+Start the application to make sure it is functioning as expected.
+
+
+Extra Credit
+
+On the User list page you notice that each User listed has links at the end of the listing for editing, displaying details and deleting a user.  Implement the "details" function.
