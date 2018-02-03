@@ -1,0 +1,70 @@
+Week 4 Lab
+Put the answers to the questions below in the "Text Submission" area when you submit the lab assignment in Blackboard.  Upload your lab solution to GitHub (or whatever GIT repository service you prefer to use).
+
+Exercise 1 (For all exercises, feel free to look at the Week 4 example app in the class GitHub repository)
+
+ Create a new MVC application like you have done before in the previous labs
+
+Add the EntityFramework NuGet package to the newly created project.
+
+Create a project folder named "Data" and then a folder under "Data" named "Entities".
+
+Create a "User" entity under the "Entities" folder with an int property named "Id" that has an attribute of [Key].
+What does the [Key] attribute tell EntityFramework?
+-->	Key tells EF that that property is a primary key field in the db table
+
+Add a class under your "Data" folder that inherits from DbContext.  (Look at the example app for help)
+
+Add a DbSet collection to the new DbContext class for the "User" entity.   (Look at the example app for help)
+
+Configure a connection string for your database in web.config.  (Look at the example app for help)
+What are connection strings used for?
+-->	Connection strings tell the application where to look for the database
+
+Create actions and corresponding views for listing and creating Users as you did in the last lab.
+
+Use your DbContext class to retrieve and add Users in the actions.  (Look at the example app for help)
+
+Run the application and make sure it functions as expected.  Add Users and view them in the list.
+
+Open "Server Explorer" in Visual Studio and view the "User" table created by the EntityFramework.
+
+Add another property to your User entity
+
+Rerun the application.  Look for the newly created property in the "User" table using "Server Explorer".
+
+The Users you added in step 10 are now gone.  Why did they disappear?
+-->	The user model was changed. In the dbContext we told it to drop and recreate the db if there were any changes
+
+
+
+Exercise 2
+
+Add a UserViewModel.  Use the view model in place of the User entity model in your User actions and views.
+Why would we use view models rather than the entity models in the controllers and views?
+-->	Restricts access to the properties from the model that the user shouldn't have access to. Also allows multiple model info to be accessed through a single view much easier
+
+Free free to copy the "Map" utility functions from the Week 4 example app.
+
+Run the application to make sure it is still functioning as expected.
+
+Implement the Details, Delete and Edit functions that are accessible at the end of each User in the User list.  (Look at the example app for help)
+
+
+
+Exercise 3 (Look at the example app for help)
+
+Add another entity to your application that is "related" to the User entity.  Remember to add a DbSet collection for your new entity to your DbContext class.
+
+In the User list view, add another action for viewing a list of the new entity you added.
+
+Create actions and corresponding views for listing and creating your new entity.  Use view models rather then interacting in directly with the new entity model.
+
+Run the application:
+
+Test to see if you can access the list for your new entity from the User list.
+
+Test to see if you can create an instance of your new entity from the list for your new entity.
+Exercise 4 (Extra credit)
+
+Implement the Details, Delete and Edit function for your new entity.
