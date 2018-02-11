@@ -1,0 +1,90 @@
+Week 5 Lab
+Put the answers to the questions below in the "Text Submission" area when you submit the lab assignment in Blackboard.  Upload your lab solution to GitHub (or whatever GIT repository service you prefer to use).
+
+You can refer to the Week5.WebApp1 for help with this lab.
+
+Exercise 1
+
+Create a new MVC project for this lab.  Copy code from last week's lab as a starting point.
+
+Create a separate “repository” class with an associated interface for storing data in the database.
+Unlike the example, for the lab you can use a single repository class for both of your entities.
+
+Create an instance of the database context class in the constructor of your new “repository” class.
+
+Replace the reference to the database context in each of your controllers with a reference the new “repository” class.
+Create an instance of the “repository class” in the constructor of each controller.
+
+Add methods to the “repository” interface and class that implement all of the database needs of your controllers.
+
+Move the code in the controllers that implements the calls to the database context to the methods in the new “repository class”.
+
+Add calls to the “repository” class methods in the controllers to satisfy their data access requirements.
+
+Run the application to test to see if you can still successfully apply each of the operations (list, create, view details, edit and delete) to
+each of the entities.
+
+Exercise 2
+
+Install the SimpleInjector NuGet package.
+
+Add the code needed to configure dependency injection for the “repository” class.
+See Global.asax and DependencyInjectionConfig.cs in the Week5.WebApp1 example.
+
+Replace the creation of the “repository” class in each of the controllers with the injection of the “repository” class via a constructor in each controller.
+
+Run the application to test to see if you can still successfully apply each of the operations (list, create, view details, edit and delete) to
+each of the entities.
+
+Exercise 3
+
+Create a service class with an interface for your second entity (the entity you created in the last lab).
+
+Add the code needed to configure dependency injection for the “service” class.
+
+Make the new service class serve the purpose of retrieving and sending the entity's data required by the related controller.
+Add methods to the new service for all of the data needs of the controller.
+
+Inject the DbContext into the repository class instead of creating an instance in the repository constructor.
+You'll need to add the code needed to configure the dependency injection of your DbContext derived class.
+
+Inject the related repository class into the service class.
+
+Inject the service class into the related controller class.
+
+Call the methods on the service class in the controller to retrieve and save data.
+
+Run the application to test to see if you can still successfully apply each of the operations (list, create, view details, edit and delete) toeach of the entities.
+
+Exercise 4 
+
+Add a method on the service to perform some "business rule logic" related to your entity that uses data in an instance of the entity.
+
+Call the service class method created in step 4 when the action for displaying the details of the entity is invoked.
+
+Display the results of the call to the service method in the entity’s detail view.  Pass the result to the "details view" via the entity's view model.
+
+Run the application to test to see if the new "detail" based on the result of the service call is displayed correctly.
+
+Briefly explain what dependency injection is and why it is beneficial.
+
+Exercise 5
+
+Create new project in you solution for unit tests.
+
+Install the following NuGet packages in your new "test" project:
+NUnit
+NUnit3TestAdapter
+FakeItEasy
+
+Create one or more unit tests to test to result of calling the "Business logic" service method.
+You'll need to create a fake/mock repository in order to control what data the service class gets when you run the test.
+For help, see the unit tests in the Week5.WebApp1 example.
+
+Run the unit tests via the Visual Studio test explorer (Test => Windows => Test Explorer).
+Did the tests succeed.  If not, fix the application code or the unit test and rerun the unit tests.
+
+Break the service method being tested intentionally and return the unit test(s).  You should see at least one unit test fail.
+Fix the tested service method and return the test.  You should see all green now.  Time to celebrate!
+
+Briefly explain what unit tests are and why they are beneficial?
