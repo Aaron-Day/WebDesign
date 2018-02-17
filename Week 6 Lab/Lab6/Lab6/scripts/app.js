@@ -1,6 +1,5 @@
 ﻿function display() {
 
-    alert("displaying");
 
     var fname = document.getElementById("firstname").value;
     var lname = document.getElementById("lastname").value;
@@ -8,7 +7,11 @@
 
     var summary = fname + " " + lname + " is " + age + " years old.";
 
-    document.getElementById("summary").innerText = summary;
+    if (fname === "" || lname === "" || age === "") {
+        alert("Fill out name and age completely");
+    } else {
+        document.getElementById("summary").innerText = summary;
+    }
 
     return false;
 }
