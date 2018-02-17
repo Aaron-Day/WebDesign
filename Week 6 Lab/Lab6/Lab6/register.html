@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<header>Aaron Day</header>
+<nav>
+    <a href="index.html">Home</a>
+    Register
+    <a href="help.html">Help</a>
+</nav>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="/styles/app.css" />
+    <script src="/scripts/app.js"></script>
+    <title>register</title>
+</head>
+<body>
+<form>
+    <p>
+        First Name:
+        <input type="text" id="firstname" maxlength="10" />
+    </p>
+    <p>
+        Last Name:
+        <input type="text" id="lastname" maxlength="15" />
+    </p>
+    <p>
+        Age:
+        <input type="number" id="age" min="0" max="125" />
+    </p>
+    <p>
+        Year in School:<br />
+        <input type="radio" name="yearinschool" value="1">Freshman<br />
+        <input type="radio" name="yearinschool" value="2">Sophmore<br />
+        <input type="radio" name="yearinschool" value="3">Junior<br />
+        <input type="radio" name="yearinschool" value="4">Senior
+    </p>
+    <p>
+        <input type="button" value="submit" onclick="display()"/>
+    </p>
+</form>
+<h2>Summary</h2>
+    <div id="summary"></div>
+</body>
+</html>
+<footer>&copy;2018 Aaron Day</footer>

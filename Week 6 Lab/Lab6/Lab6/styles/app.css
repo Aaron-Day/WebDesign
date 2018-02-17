@@ -1,0 +1,30 @@
+﻿header {
+    background-color: maroon;
+    color: goldenrod;
+    height: 40px;
+    padding-top: 20px;
+}
+nav {
+    background-color: goldenrod;
+    color: darkblue;
+    height: 40px;
+    padding-top: 20px;
+}
+body {
+    background-color: darkblue;
+    color: white;
+    font-size: 20px;
+}
+.owl {
+    color: goldenrod;
+    font-style: italic;
+}
+.padded {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+table {
+    border-color: black;
+    border-style: solid;
+    border-width: 2px;
+}
