@@ -21,44 +21,35 @@ namespace Lab8.Service
         public PetViewModel GetPet(int id)
         {
             _log.Info($"GetPet, id: {id}");
-
-            PetViewModel pet;
             try
             {
-                pet = MapToPetViewModel(_repository.GetPet(id));
+                return MapToPetViewModel(_repository.GetPet(id));
             }
             catch (Exception e)
             {
                 _log.Error($"Failure to get pet: {id}", e);
                 throw;
             }
-
-            return pet;
         }
 
-        public IEnumerable<PetViewModel> GetUsersPets(int userid)
+        public IEnumerable<PetViewModel> GetUsersPets(string userid)
         {
             _log.Info($"GetUsersPets, userid: {userid}");
-
-            IEnumerable<PetViewModel> views;
             try
             {
                 var pets = _repository.GetUsersPets(userid);
-                views = pets.Select(MapToPetViewModel).ToList();
+                return pets.Select(MapToPetViewModel).ToList();
             }
             catch (Exception e)
             {
                 _log.Error($"Failure to get users pets: {userid}", e);
                 throw;
             }
-
-            return views;
         }
 
         public void CreatePet(PetViewModel pet)
         {
             _log.Info($"CreatePet, user: {pet.UserId}");
-
             try
             {
                 _repository.CreatePet(MapToPet(pet));
@@ -73,7 +64,6 @@ namespace Lab8.Service
         public void UpdatePet(PetViewModel pet)
         {
             _log.Info($"UpdatePet, pet: {pet.Id}, user: {pet.UserId}");
-
             try
             {
                 var p = _repository.GetPet(pet.Id);
@@ -90,7 +80,6 @@ namespace Lab8.Service
         public void DeletePet(int id)
         {
             _log.Info($"DeletePet, id: {id}");
-
             try
             {
                 _repository.DeletePet(id);
@@ -108,7 +97,6 @@ namespace Lab8.Service
         private Pet MapToPet(PetViewModel pet)
         {
             _log.Info($"MapToPet, pet: {pet.Id}, user: {pet.UserId}");
-
             try
             {
                 return new Pet
@@ -131,7 +119,6 @@ namespace Lab8.Service
         private PetViewModel MapToPetViewModel(Pet pet)
         {
             _log.Info($"MapToPetViewModel, pet: {pet.Id}, user: {pet.UserId}");
-
             try
             {
                 return new PetViewModel
@@ -155,7 +142,6 @@ namespace Lab8.Service
         private void CopyToPet(PetViewModel view, Pet pet)
         {
             _log.Info($"CopyToPet, pet: {view.Id}, user: {view.UserId}");
-
             try
             {
                 pet.Id = view.Id;

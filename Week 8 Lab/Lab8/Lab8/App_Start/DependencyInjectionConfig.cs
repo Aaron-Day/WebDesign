@@ -19,9 +19,7 @@ namespace Lab8
             container.Options.DefaultScopedLifestyle = new WebRequestLifestyle();
 
             // Register your types, for instance:
-            container.Register<IUserRepository, UserRepository>(Lifestyle.Scoped);
             container.Register<IPetRepository, PetRepository>(Lifestyle.Scoped);
-            container.Register<IUserService, UserService>(Lifestyle.Scoped);
             container.Register<IPetService, PetService>(Lifestyle.Scoped);
             container.Register<ApplicationDbContext, ApplicationDbContext>(Lifestyle.Scoped);
 

@@ -6,7 +6,7 @@ namespace Lab8.Service
     public interface IPetService
     {
         PetViewModel GetPet(int id);
-        IEnumerable<PetViewModel> GetUsersPets(int userid);
+        IEnumerable<PetViewModel> GetUsersPets(string userid);
         void CreatePet(PetViewModel pet);
         void UpdatePet(PetViewModel pet);
         void DeletePet(int id);

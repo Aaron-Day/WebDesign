@@ -10,7 +10,7 @@ namespace Lab8.Repository
     public class PetRepository : IPetRepository
     {
         private readonly ApplicationDbContext _context;
-        private readonly ILog _log = log4net.LogManager.GetLogger(typeof(PetRepository));
+        private readonly ILog _log = LogManager.GetLogger(typeof(PetRepository));
 
         public PetRepository(ApplicationDbContext context)
         {
@@ -20,44 +20,37 @@ namespace Lab8.Repository
         public Pet GetPet(int id)
         {
             _log.Info($"GetPet, id: {id}");
-
-            Pet pet;
             try
             {
-                pet = _context.MyPets.Find(id);
+                return _context.Pets.Find(id);
             }
             catch (Exception e)
             {
                 _log.Error($"Failure to get pet: {id}", e);
                 throw;
             }
-            return pet;
         }
 
-        public IEnumerable<Pet> GetUsersPets(int userid)
+        public IEnumerable<Pet> GetUsersPets(string userid)
         {
             _log.Info($"GetUsersPets, userid: {userid}");
-
-            IEnumerable<Pet> pets;
             try
             {
-                pets = _context.MyPets.Where(p => p.UserId == userid).ToList();
+                return _context.Pets.Where(p => p.UserId == userid).ToList();
             }
             catch (Exception e)
             {
                 _log.Error($"Failure to get all pets for user: {userid}", e);
                 throw;
             }
-            return pets;
         }
 
         public void CreatePet(Pet pet)
         {
             _log.Info($"CreatePet, user: {pet.UserId}");
-
             try
             {
-                _context.MyPets.Add(pet);
+                _context.Pets.Add(pet);
                 _context.SaveChanges();
             }
             catch (Exception e)
@@ -70,7 +63,6 @@ namespace Lab8.Repository
         public void UpdatePet(Pet pet)
         {
             _log.Info($"UpdatePet, pet: {pet.Id}, user: {pet.UserId}");
-
             try
             {
                 _context.SaveChanges();
@@ -89,7 +81,7 @@ namespace Lab8.Repository
             Pet pet;
             try
             {
-                pet = _context.MyPets.Find(id);
+                pet = _context.Pets.Find(id);
             }
             catch (Exception e)
             {
@@ -105,7 +97,7 @@ namespace Lab8.Repository
 
             try
             {
-                _context.MyPets.Remove(pet);
+                _context.Pets.Remove(pet);
                 _context.SaveChanges();
             }
             catch (Exception e)

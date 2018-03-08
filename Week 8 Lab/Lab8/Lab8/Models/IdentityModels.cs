@@ -38,8 +38,7 @@ namespace Lab8.Models
             return new ApplicationDbContext();
         }
 
-        public DbSet<User> MyUsers { get; set; }
-        public DbSet<Pet> MyPets { get; set; }
+        public DbSet<Pet> Pets { get; set; }
     }
 
     public class AppDbInitializer : DropCreateDatabaseIfModelChanges<ApplicationDbContext>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Lab8.Models;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace Lab8.Data.Entities
@@ -23,7 +24,7 @@ namespace Lab8.Data.Entities
         public string VetName { get; set; }
 
         [Display(Name = "Owner's ID")]
-        public int UserId { get; set; }
-        public User User { get; set; }
+        public string UserId { get; set; }
+        public ApplicationUser User { get; set; }
     }
 }
