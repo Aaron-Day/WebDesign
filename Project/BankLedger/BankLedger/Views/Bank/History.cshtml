@@ -1,0 +1,52 @@
+﻿@model IEnumerable<BankLedger.Models.Transaction>
+
+@{
+    ViewBag.Title = "History";
+}
+
+<h2>History</h2>
+<p>Account Type: @ViewBag.Account.Type | Account Name: @ViewBag.Account.Name </p>
+
+<p>
+    @Html.ActionLink("Deposit", "Deposit", new { id = ViewBag.Account.Id }, new { @class = "btn btn-success btn-md" }) |
+    @Html.ActionLink("Withdrawl", "Withdrawl", new { id = ViewBag.Account.Id }, new { @class = "btn btn-danger btn-md" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TimeStamp)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Type)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Amount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Balance)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TimeStamp)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Amount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Balance)
+            </td>
+        </tr>
+    }
+
+</table>
+
+<div>
+    @Html.ActionLink("Back to Accounts", "Index", null, new { @class = "btn btn-primary" })
+</div>

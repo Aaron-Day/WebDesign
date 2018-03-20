@@ -1,12 +1,11 @@
-﻿using System;
+﻿using BankLedger.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin.Security;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
-using Microsoft.Owin.Security;
-using BankLedger.Models;
 
 namespace BankLedger.Controllers
 {
@@ -14,16 +13,10 @@ namespace BankLedger.Controllers
     public class ManageController : Controller
     {
         private ApplicationSignInManager _signInManager;
-        private ApplicationUserManager _userManager;
+        private static ApplicationUserManager _userManager;
 
         public ManageController()
         {
-        }
-
-        public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
-        {
-            UserManager = userManager;
-            SignInManager = signInManager;
         }
 
         public ApplicationSignInManager SignInManager
@@ -32,9 +25,9 @@ namespace BankLedger.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -64,8 +57,12 @@ namespace BankLedger.Controllers
                 : "";
 
             var userId = User.Identity.GetUserId();
+            var context = new ApplicationDbContext();
+            var user = context.Users.Find(userId);
             var model = new IndexViewModel
             {
+                FirstName = user.FirstName,
+                LastName = user.LastName,
                 HasPassword = HasPassword(),
                 PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
                 TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
@@ -333,7 +330,33 @@ namespace BankLedger.Controllers
             base.Dispose(disposing);
         }
 
-#region Helpers
+        [Authorize]
+        [HttpGet]
+        public ActionResult ChangeName()
+        {
+            var user = UserManager.FindById(User.Identity.GetUserId());
+            var view = new ChangeNameViewModel
+            {
+                FirstName = user.FirstName,
+                LastName = user.LastName
+            };
+            return View(view);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public ActionResult ChangeName(ChangeNameViewModel view)
+        {
+            var context = new ApplicationDbContext();
+            var user = context.Users.Find(User.Identity.GetUserId());
+            user.FirstName = view.FirstName;
+            user.LastName = view.LastName;
+            user.UserName = view.FirstName ?? user.Email;
+            context.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        #region Helpers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
 
@@ -384,6 +407,6 @@ namespace BankLedger.Controllers
             Error
         }
 
-#endregion
+        #endregion
     }
 }

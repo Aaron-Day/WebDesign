@@ -1,4 +1,6 @@
 ﻿using BankLedger.Models;
+using BankLedger.Repositories;
+using BankLedger.Services;
 using SimpleInjector;
 using SimpleInjector.Integration.Web;
 using SimpleInjector.Integration.Web.Mvc;
@@ -17,6 +19,8 @@ namespace BankLedger
 
             // Register your types, for instance:
             container.Register<ApplicationDbContext, ApplicationDbContext>(Lifestyle.Scoped);
+            container.Register<IBankRepository, BankRepository>(Lifestyle.Scoped);
+            container.Register<IBankService, BankService>(Lifestyle.Scoped);
 
             // This is an extension method from the integration package.
             container.RegisterMvcControllers(Assembly.GetExecutingAssembly());
